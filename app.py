@@ -13,13 +13,20 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    cod = db.Column(db.String(5), unique=True, nullable=False)
 
-    def __init__(self, username, email):
+    def __init__(self, username, email, cod):
         self.username = username
         self.email = email
+        self.cod = cod
 
     def json(self):
-        return {"id": self.id, "username": self.username, "email": self.email}
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "cod": self.cod,
+        }
 
 
 db.create_all()
@@ -34,7 +41,7 @@ def test():
 def create_user():
     try:
         data = request.get_json()
-        new_user = User(username=data["username"], email=data["email"])
+        new_user = User(username=data["username"], email=data["email"], cod=data["cod"])
         db.session.add(new_user)
         db.session.commit()
         return make_response(jsonify({"message": "user created"}), 201)
@@ -70,6 +77,7 @@ def update_user(id):
             data = request.get_json()
             user.username = data["username"]
             user.email = data["email"]
+            user.cod = data["cod"]
             db.session.commit()
             return make_response(jsonify({"message": "user updated"}), 200)
         return make_response(jsonify({"message": "user not found"}), 404)
