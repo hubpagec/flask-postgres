@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
 db = SQLAlchemy(app)
 
+
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -16,15 +17,18 @@ class User(db.Model):
     def __init__(self, username, email):
         self.username = username
         self.email = email
-    
+
     def json(self):
         return {'id': self.id, 'username': self.username, 'email': self.email}
 
+
 db.create_all()
+
 
 @app.route('/test', methods=['GET'])
 def test():
     return make_response(jsonify({'message': 'test route'}), 200)
+
 
 @app.route('/users', methods=['POST'])
 def create_user():
@@ -36,7 +40,8 @@ def create_user():
         return make_response(jsonify({'message': 'user created'}), 201)
     except e:
         return make_response(jsonify({'message': 'error creating user'}), 500)
-    
+
+
 @app.route('/users', methods=['GET'])
 def get_users():
     try:
@@ -45,16 +50,18 @@ def get_users():
     except e:
         return make_response(jsonify({'message': 'getting users'}), 500)
 
+
 @app.route('/users/<int:id>', methods=['GET'])
 def get_user(id):
     try:
         user = User.query.filter_by(id=id).first()
         if user:
-            return make_response (jsonify({'user': user.json()}), 200)
+            return make_response(jsonify({'user': user.json()}), 200)
         return make_response(jsonify({'message': 'user not found'}), 404)
     except e:
         return make_response(jsonify({'message': 'error getting users'}), 500)
-        
+
+
 @app.route('/users/<int:id>', methods=['PUT'])
 def update_user(id):
     try:
@@ -68,11 +75,12 @@ def update_user(id):
         return make_response(jsonify({'message': 'user not found'}), 404)
     except e:
         return make_response(jsonify({'message': 'error updating user'}), 500)
-    
+
+
 @app.route('/users/<int:id>', methods=['DELETE'])
 def delete_user(id):
     try:
-        user =User.query.filter_by(id=id).first()
+        user = User.query.filter_by(id=id).first()
         if user:
             db.session.delete(user)
             db.session.commit()
