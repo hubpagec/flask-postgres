@@ -6,7 +6,7 @@ services:
     image: flask-app:1.0.0
     build: .
     ports:
-      - "4000:4000"
+      - "8080:8080"
     environment:
 #      - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
       - DB_URL=postgresql://flask_db_owner:ieph7TqHM8xB@ep-weathered-sunset-a4fear84.us-east-1.aws.neon.tech/flask_db?sslmode=require
