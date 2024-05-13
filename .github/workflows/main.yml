@@ -1,7 +1,7 @@
 name: Deploy app
 
 on:
-  push:
+  fork:
     branches: [ main ]
 
   workflow_dispatch:

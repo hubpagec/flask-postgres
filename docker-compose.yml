@@ -6,7 +6,7 @@ services:
     image: flask-app:1.0.0
     build: .
     ports:
-      - "8080:8080"
+      - "4000:4000"
     environment:
      - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
     depends_on:
