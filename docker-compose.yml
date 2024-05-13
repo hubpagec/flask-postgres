@@ -8,13 +8,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-<<<<<<< HEAD
-#      - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
-#      - DB_URL=postgres://post:3oPHHCO96TuU3jHGjLgEaymO1sqjb5WA@dpg-cp0mpvo21fec7387g520-a.oregon-postgres.render.com/post_az3v
-      - DB_URL=postgres://post:3oPHHCO96TuU3jHGjLgEaymO1sqjb5WA@dpg-cp0mpvo21fec7387g520-a/post_az3v
-=======
-      - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
->>>>>>> parent of 7bbb50b (feat: add new connection string to postgres)
+     - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
     depends_on:
       - flask_db
   flask_db:
