@@ -9,7 +9,7 @@ services:
       - "8080:8080"
     environment:
 #      - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
-      - DB_URL=postgresql://flask_db_owner:ieph7TqHM8xB@ep-weathered-sunset-a4fear84.us-east-1.aws.neon.tech/flask_db?sslmode=require
+      - DB_URL=postgres://post:3oPHHCO96TuU3jHGjLgEaymO1sqjb5WA@dpg-cp0mpvo21fec7387g520-a.oregon-postgres.render.com/post_az3v
     depends_on:
       - flask_db
   flask_db:
@@ -19,8 +19,8 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_USER=post
+      - POSTGRES_DB=post
     volumes:
       - pgdata:/var/lib/postgresql/data
 
